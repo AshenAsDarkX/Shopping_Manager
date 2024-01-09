@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Clothes extends Product {
     private String size;
     private String color;
@@ -27,4 +30,5 @@ public class Clothes extends Product {
     public void setColor(String color) {
         this.color = color;
     }
+
 }

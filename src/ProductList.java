@@ -40,6 +40,19 @@ private HashMap<String, Product> proList = new HashMap<>();
             System.out.println(entry.getKey() + ": " + entry.getValue().getProductName());
         }
         }
+
+    public void getClothes(){
+        Map<String, Product> clothesMap = new HashMap<>();
+        for (Map.Entry<String, Product> entry : this.proList.entrySet()) {
+            if (entry.getValue() instanceof Clothes) {
+                clothesMap.put(entry.getKey(), (Clothes) entry.getValue());
+            }
+        }
+        System.out.println("Electronics:");
+        for (Map.Entry<String, Product> entry : clothesMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue().getProductName());
+        }
+    }
     @Override
     public String toString() {
         return "ProductList" +

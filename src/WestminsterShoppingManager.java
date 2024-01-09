@@ -302,6 +302,9 @@ public class WestminsterShoppingManager {
                 if(proType.equals("1")){
                     stock.getElectronics();
                 }
+                if(proType.equals("2")){
+                    stock.getElectronics();
+                }
         }
     }
 }
