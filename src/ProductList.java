@@ -27,7 +27,10 @@ private HashMap<String, Product> proList = new HashMap<>();
     public void delProduct(String key){
         this.proList.remove(key);
     }
-    
+
+    public void viewProduct(String objKey){
+        proList.get(objKey);
+    }
     public void getElectronics(){
             Map<String, Product> electronicsMap = new HashMap<>();
             for (Map.Entry<String, Product> entry : this.proList.entrySet()) {

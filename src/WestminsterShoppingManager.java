@@ -272,7 +272,7 @@ public class WestminsterShoppingManager {
             password = sc.nextLine();
             if(users.login(userName, password)){
                 System.out.println("You're logged in !");
-                loggedInUser(stock);
+                loggedInUser(users, stock);
                 break;
             }
             else {
@@ -283,7 +283,7 @@ public class WestminsterShoppingManager {
 
     }
 
-    public static void loggedInUser(ProductList stock){
+    public static void loggedInUser(Users users, ProductList stock){
         Scanner sc = new Scanner(System.in);
         System.out.println("""
                 What do u wanna do?
@@ -301,10 +301,17 @@ public class WestminsterShoppingManager {
                 String proType = sc.nextLine();
                 if(proType.equals("1")){
                     stock.getElectronics();
+                    System.out.println("""
+                            Please enter the product id of your chosen product :""");
+                    String proId = sc.nextLine();
+                    stock.viewProduct(proId);
+                    
                 }
                 if(proType.equals("2")){
                     stock.getElectronics();
                 }
+            case "2":
+
         }
     }
 }
