@@ -1,18 +1,20 @@
-public class Electronics extends Product {
+import java.io.Serializable;
+
+public class Electronics extends Product implements Serializable {
     private String eleBrand;
-    private String warrPeriod;
+    private int warrPeriod;
 
     public Electronics() {
     }
     public Electronics(String eleBrand) {
         this.eleBrand = eleBrand;
     }
-    public Electronics(String eleBrand, String warrPeriod) {
+    public Electronics(String eleBrand, int warrPeriod) {
         this.eleBrand = eleBrand;
         this.warrPeriod = warrPeriod;
     }
 
-    public Electronics(String proId, String proName, double price,int quantity, String eleBrand, String warrPeriod) {
+    public Electronics(String proId, String proName, double price,int quantity, String eleBrand, int warrPeriod) {
         super(proId, proName, price, quantity);
         this.eleBrand = eleBrand;
         this.warrPeriod = warrPeriod;
@@ -26,11 +28,11 @@ public class Electronics extends Product {
         this.eleBrand = eleBrand;
     }
 
-    public String getWarrPeriod() {
+    public int getWarrPeriod() {
         return warrPeriod;
     }
 
-    public void setWarrPeriod(String warrPeriod) {
+    public void setWarrPeriod(int warrPeriod) {
         this.warrPeriod = warrPeriod;
     }
 

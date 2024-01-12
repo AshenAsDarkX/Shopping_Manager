@@ -1,6 +1,6 @@
-import java.lang.reflect.Constructor;
+import java.io.Serializable;
 
-public abstract class Product {
+public abstract class Product implements Serializable {
 
 //    Initialize variables
     private String productId;
@@ -18,15 +18,6 @@ public Product(){
 public Product(String proId){
     this.productId = proId;
 }
-    public Product(String proId, String proName){
-        this.productId = proId;
-        this.productName = proName;
-    }
-    public Product(String proId, String proName, int numOfAva){
-        this.productId = proId;
-        this.productName = proName;
-        this.numOfAvaItms = numOfAva;
-    }
     public Product(String proId, String proName, double price,int quantity){
         this.productId = proId;
         this.productName = proName;
@@ -58,9 +49,14 @@ public Product(String proId){
     public String getProductName(){
         return productName;
     }
-    public int getNumOfAvaItms(){
-        return numOfAvaItms;
+    public int getQuantity(){
+        return quantity;
     }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public double getProPrice(){
     return proPrice;
     }

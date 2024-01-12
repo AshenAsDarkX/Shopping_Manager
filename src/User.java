@@ -1,8 +1,10 @@
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String userName;
     private String password;
 
-    private Cart cart = new Cart();
+    private final ShoppingCart cart = new ShoppingCart();
 
     public User(String userName, String password) {
         this.userName = userName;
@@ -25,7 +27,7 @@ public class User {
         this.password = password;
     }
 
-//    public void addToCart(String proId){
-//        cart.addProduct();
-//    }
+    public int getItemQuantity(String proId){
+        return cart.getItemQuantity(proId);
+    }
 }

@@ -1,13 +1,9 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
 
-public class Clothes extends Product {
+public class Clothes extends Product implements Serializable {
     private String size;
     private String color;
 
-    public Clothes(String proId, String proName, int numOfAva, double price, String size) {
-        this.size = size;
-    }
 
     public Clothes(String proId, String proName, double price,int quantity, String size, String color) {
         super(proId, proName, price, quantity);
