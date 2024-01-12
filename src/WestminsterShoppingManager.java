@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.io.*;
 import java.util.Scanner;
 
-public class WestminsterShoppingManager {
+public class WestminsterShoppingManager implements ShoppingManager {
     public static void main(String[] args) {
         
          Stock stock = new Stock();
@@ -14,7 +14,8 @@ public class WestminsterShoppingManager {
                 ----------------------------------------------------------""");
         while(true){
 
-            Scanner sc= new Scanner(System.in);
+            Scanner sc= new Scanner(System.in);// Initializing a scanner to scan inputs
+//            Showing the instruction to the user
             System.out.println("""
                 If you are a customer press      '1'
                 If you are the manager press     '2'
@@ -37,21 +38,22 @@ public class WestminsterShoppingManager {
 
                     switch (regChoice){
                         case "1":
-                            logIn(users, stock);
+                            logIn(users, stock);//Method for login
                             break regLoop;
                         case "2":
-                            register(users);
+                            register(users);//Method for Register
                             break;
                         case "3":
-                            break mainloop;
+                            break mainloop;//Method for break the loop
                         default:
                             System.out.println("\nPlease enter a valid input !");
-                            break regLoop;
+                            break regLoop;//Error handling
                     }
                 }
 
             }
             if (choice.equals("2")){
+                //Showing manager options
                 System.out.print("""
                      What do you wanna do?
                        -add a new product press 1
@@ -67,14 +69,14 @@ public class WestminsterShoppingManager {
                                      -if electronics press 1
                                      -if clothes press     2
                                 """);
-                        System.out.print("\nPlease enter your choice :");
+                        System.out.print("\nPlease enter your choice :");//Getting inputs for manage the choices
                         String type = sc.nextLine();
                         if (type.equals("1")) {
                             addEleProduct(stock);
-                        } else if (type.equals("2")) {
+                        }else if(type.equals("2")) {
                             addCloProduct(stock);
                         } else {
-                            System.out.print("Please enter a valid input !\n");
+                            System.out.print("Please enter a valid input !\n");//Error handling
                         }
                     }
                     case "2" -> {
@@ -85,17 +87,21 @@ public class WestminsterShoppingManager {
                         String key = sc.nextLine();
                         stock.delProduct(key);
                     }
-                    case "3" -> stock.viewProList();
-                    default -> System.out.println("Please enter a valid input (-_-)\n");
+                    case "3" -> {stock.viewProList();break;}
+                    default -> {
+                        System.out.println("Please enter a valid input (-_-)\n");
+                        break;
+                    }
+
                 }
             }
-            if(choice.equals("3")){
+            else if (choice.equals("3")){
                 saveFile(stock,users);
             }
-            if(choice.equals("4")){
+            else if(choice.equals("4")){
                 loadFile(stock, users);
             }
-            if (choice.equals("5")){
+            else if (choice.equals("5")){
                 System.out.print("Are you sure you want to terminate the program !(Y/N)");  //Exiting the program
                 String terminate = sc.nextLine();
                 if (terminate.equalsIgnoreCase("Y")) {
@@ -106,12 +112,18 @@ public class WestminsterShoppingManager {
                     break;
                 } else {
                     System.out.println("please enter a valid input!");
+                    break;
 
                 }
+            }
+            else {
+                System.out.println("Please enter a valid input!\n");
             }
         }
 
     }
+
+    //Method for add Electronic product
     public static void addEleProduct(Stock storeStock){
         Scanner scan = new Scanner(System.in);
         String proId;
@@ -119,7 +131,7 @@ public class WestminsterShoppingManager {
         String proBrand;
         int proWarranty = 0;
         double proPrice = 0;
-        int quantity;
+        int quantity=0;
 
         while (true) {
             System.out.print("\nEnter product Id : ");
@@ -128,6 +140,7 @@ public class WestminsterShoppingManager {
                 break;
             } else {
                 System.out.println("WARNING!! PRODUCT ID cannot be empty\n");
+                break;
             }
         }
         while (true) {
@@ -149,9 +162,10 @@ public class WestminsterShoppingManager {
             }
         }
         while (true) {
+            Scanner sc =new Scanner(System.in);
             try {
                 System.out.print("\nEnter products' warranty period in years : ");
-                proWarranty = scan.nextInt();
+                proWarranty = sc.nextInt();
                 if (proWarranty != 0) {
                     break;
                 } else {
@@ -163,28 +177,36 @@ public class WestminsterShoppingManager {
             }
         }
         while (true) {
+            Scanner sc =new Scanner(System.in);
             try{
                 System.out.print("\nEnter products' price : ");
-                proPrice = scan.nextDouble();
+                proPrice = sc.nextDouble();
                 if (proPrice != 0) {
                     break;
                 } else {
                     System.out.println("WARNING!! product must have a price !\n");
                 }
             }catch(Exception e){
-                System.out.println("Please enter a valid input !\n");
+                System.out.println("Please enter a valid input!\n");
                 break;
             }
         }
         while (true) {
-            System.out.print("\nEnter quantity : ");
-            quantity = scan.nextInt();
-            if (quantity != 0) {
+            Scanner sc =new Scanner(System.in);
+            try {
+                System.out.print("\nEnter quantity : ");
+                quantity = sc.nextInt();
+                if (quantity != 0) {
+                    break;
+                } else {
+                    System.out.println("WARNING!! must have a quantity !\n");
+                }
+            }catch (Exception e){
+                System.out.println("Please enter a valid input!");
                 break;
-            } else {
-                System.out.println("WARNING!! must have a quantity !\n");
             }
         }
+
         if(storeStock.keyAvailability(proId)){
             Electronics eleItem = new Electronics(proId,proName,proPrice,quantity,proBrand,proWarranty);
             storeStock.addProduct(proId, eleItem);
@@ -194,14 +216,16 @@ public class WestminsterShoppingManager {
             System.out.println("Warning! ProductId is already used \n");
         }
         }
+
+        //Method for add Clothing objects
     public static void addCloProduct(Stock storeStock){
         Scanner scan = new Scanner(System.in);
         String proId;
         String proName;
         String proSize;
         String proColor;
-        double proPrice;
-        int quantity;
+        double proPrice=0;
+        int quantity=0;
         while (true) {
             System.out.print("\nEnter product Id : ");
             proId = scan.nextLine();
@@ -239,23 +263,36 @@ public class WestminsterShoppingManager {
             }
         }
         while (true) {
-            System.out.print("\nEnter products' price : ");
-            proPrice = scan.nextDouble();
-            if (proPrice != 0) {
+            Scanner sc = new Scanner(System.in);
+            try {
+                System.out.print("\nEnter products' price : ");
+                proPrice = sc .nextDouble();
+                if (proPrice != 0) {
+                    break;
+                } else {
+                    System.out.println("WARNING!! product must have a price !\n");
+                }
+            }catch (Exception e){
+                System.out.println("Please enter a valid input!");
                 break;
-            } else {
-
-                System.out.println("WARNING!! product must have a price !\n");
             }
         }
         while (true) {
-            System.out.print("\nEnter quantity : ");
-            quantity = scan.nextInt();
-            if (quantity != 0) {
+            Scanner sc = new Scanner(System.in);
+            try {
+                System.out.print("\nEnter quantity : ");
+                quantity = sc.nextInt();
+
+                if (quantity != 0) {
+                    break;
+                } else {
+                    System.out.println("WARNING!! must have a quantity !\n");
+                }
+            }catch (Exception e){
+                System.out.println("Please enter a valid input!");
                 break;
-            } else {
-                System.out.println("WARNING!! must have a quantity !\n");
             }
+
         }
         if(storeStock.keyAvailability(proId)){
             Clothes cloItem = new Clothes(proId,proName,proPrice,quantity,proSize,proColor);
@@ -267,6 +304,8 @@ public class WestminsterShoppingManager {
         }
 
     }
+
+    //Method for Register a user
     public static void register(Users users){
         Scanner sc = new Scanner(System.in);
         String userName;
@@ -301,6 +340,7 @@ public class WestminsterShoppingManager {
 
     }
 
+//    Method for Login for the user
     public static void logIn(Users users, Stock stock){
         Scanner sc = new Scanner(System.in);
         String userName;
@@ -323,6 +363,7 @@ public class WestminsterShoppingManager {
         }
     }
 
+    //Method for save the object
     public static void saveFile(Stock stock, Users users) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("shopping_data.txt"))) {
             outputStream.writeObject(stock);
@@ -334,6 +375,7 @@ public class WestminsterShoppingManager {
         }
     }
 
+//    Method for retreive data from saved file
     public static void loadFile(Stock stock, Users users) {
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("shopping_data.txt"))) {
             Stock savedStock = (Stock) inputStream.readObject();

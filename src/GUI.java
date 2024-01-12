@@ -8,12 +8,15 @@ import java.util.List;
 import java.util.Map;
 
 class GUI extends JFrame {
+//    Initializing varibles
     private final JTable table;
     private final JPanel detailsPanel;
     private final Stock stock;
     private final ShoppingCart shoppingCart;
 
+
     public GUI(Stock stock) {
+//        cloning the stock from main class
         this.stock = stock;
         shoppingCart = new ShoppingCart();
 
@@ -28,12 +31,12 @@ class GUI extends JFrame {
 
 
 
-        // Create a panel for the dropdown menu and center it
+        // Creating a panel for the dropdown menu and center it
         JPanel dropdownPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         dropdownPanel.add(categoryList);
         add(dropdownPanel, BorderLayout.NORTH);
 
-        // Create shopping cart button
+        // Creating shopping cart button
         JButton viewCartButton = new JButton("Shopping Cart");
         viewCartButton.addActionListener(e -> viewShoppingCart()); // Add an action listener to handle the button click
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -41,10 +44,11 @@ class GUI extends JFrame {
         topPanel.add(viewCartButton);
         add(topPanel, BorderLayout.NORTH);
 
-        // Create table
+        // Creating table
         String[] columnNames = {"Product ID", "Name", "quantity", "Price(£)", "Type"};
         table = new JTable(new DefaultTableModel(columnNames, 0));
         populateTableFromStock((DefaultTableModel) table.getModel(), stock); // Populate the table from the Stock
+
         // Add a ListSelectionListener to the table
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -168,7 +172,7 @@ class GUI extends JFrame {
         }
     }
 
-    private void addToCartClicked() {
+    private void addToCartClicked() { //Method awakens when add to cart button clicked
         int selectedRow = table.getSelectedRow();
         if (selectedRow != -1) {
             String productId = (String) table.getValueAt(selectedRow, 0);
@@ -189,7 +193,7 @@ class GUI extends JFrame {
         }
     }
 
-    private void viewShoppingCart() {
+    private void viewShoppingCart() {// Method handles the viewing cart
         JFrame cartFrame = new JFrame("Shopping Cart");
         cartFrame.setLayout(new BorderLayout());
 
@@ -223,7 +227,7 @@ class GUI extends JFrame {
         cartFrame.setVisible(true);
     }
 
-    private double calculateTotalWithDiscount() {
+    private double calculateTotalWithDiscount() { // Method for calculate total with discount
         double total = 0;
 
         for (Map.Entry<String, Product> entry : shoppingCart.getProList().entrySet()) {

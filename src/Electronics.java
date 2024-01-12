@@ -1,18 +1,11 @@
 import java.io.Serializable;
 
 public class Electronics extends Product implements Serializable {
+//    Initializing variables
     private String eleBrand;
     private int warrPeriod;
 
-    public Electronics() {
-    }
-    public Electronics(String eleBrand) {
-        this.eleBrand = eleBrand;
-    }
-    public Electronics(String eleBrand, int warrPeriod) {
-        this.eleBrand = eleBrand;
-        this.warrPeriod = warrPeriod;
-    }
+//    Initializing constructors
 
     public Electronics(String proId, String proName, double price,int quantity, String eleBrand, int warrPeriod) {
         super(proId, proName, price, quantity);
@@ -20,16 +13,17 @@ public class Electronics extends Product implements Serializable {
         this.warrPeriod = warrPeriod;
     }
 
+//    Getteras
     public String getEleBrand() {
         return eleBrand;
     }
-
-    public void setEleBrand(String eleBrand) {
-        this.eleBrand = eleBrand;
-    }
-
     public int getWarrPeriod() {
         return warrPeriod;
+    }
+
+//    Setters
+    public void setEleBrand(String eleBrand) {
+        this.eleBrand = eleBrand;
     }
 
     public void setWarrPeriod(int warrPeriod) {
